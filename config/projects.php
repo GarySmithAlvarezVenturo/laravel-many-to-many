@@ -10,7 +10,7 @@ return [
         "description"      => "A clone of Spotify Web",
         "languages"        => "HTML, CSS",
         "link_github"      => "https://github.com/GarySmithAlvarezVenturo/html-css-spotifyweb",
-	"type_id"              => "1",
+	    "type_id"              => "1",
     ],
     [
         "title"            => "Campominato",
