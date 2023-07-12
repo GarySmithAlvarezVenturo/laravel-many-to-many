@@ -6,14 +6,14 @@
     @php $project = session('delete_success') @endphp
     <div class="alert alert-danger">
         The project "{{ $project->title }}" has been Deleted
-        <form
-            action="{{ route("admin.project.restore", ['project' => $project]) }}"
+        {{-- <form
+            action="{{ route("admin.project.cancel", ['project' => $project]) }}"
                 method="post"
                 class="d-inline-block"
             >
             @csrf
             <button class="btn btn-warning">Calcel</button>
-        </form>
+        </form> --}}
     </div>
     @endif
 
@@ -53,12 +53,12 @@
                     </td>
                     <td>{{ $project->link_github }}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{ route('admin.project.show', ['project' => $project->id]) }}">View</a>
-                        <form class="d-inline-block" method="POST" action="{{ route('admin.project.restore', ['project' => $project->id]) }}">
+                        <a class="btn btn-primary" href="{{ route('admin.project.show', ['project' => $project]) }}">View</a>
+                        <form class="d-inline-block" method="POST" action="{{ route('admin.project.restore', ['project' => $project]) }}">
                             @csrf
                             <button class="btn btn-warning">Restore</button>
                         </form>
-                        <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->id }}">
+                        <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->slug }}">
                             Delete
                         </button>
                     </td>

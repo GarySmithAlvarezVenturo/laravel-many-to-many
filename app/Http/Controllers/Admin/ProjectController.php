@@ -94,8 +94,9 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
+    public function edit($slug)
     {
+        $project = Project::where('slug', $slug)->firstOrFail();
         $types = Type::all();
         $languages = Language::all();
         return view('admin.projects.edit', compact('project', 'types', 'languages'));
@@ -108,8 +109,9 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(Request $request, $slug)
     {
+        $project = Project::where('slug', $slug)->firstOrFail();
         // validare i dati 
         $request->validate($this->validations);
 
@@ -137,18 +139,20 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
+    public function destroy($slug)
     {
+        $project = Project::where('slug', $slug)->firstOrFail();
         $project->delete();
 
         return to_route('admin.project.index')->with('delete_success', $project);
     }
 
-    public function restore($id)
+    public function restore($slug)
     {
-        Project::withTrashed()->where('id', $id)->restore();
-
-        $project = Project::find($id);
+           
+        $project = Project::find($slug);
+        Project::withTrashed()->where('slug', $slug)->restore();
+        $project = Project::where('slug', $slug)->firstOrFail();
 
         return to_route('admin.project.trashed')->with('restore_success', $project);
     }
@@ -161,9 +165,10 @@ class ProjectController extends Controller
         return view('admin.projects.trashed', compact('trashedProjects'));
     }
 
-    public function harddelete($id)
+    public function harddelete($slug)
     {
-        $project = Project::withTrashed()->find($id);
+        $project = Project::withTrashed()->find($slug);
+        $project = Project::where('slug', $slug)->firstOrFail();
         
         $project->languages()->detach();
         $project->forceDelete();
@@ -171,11 +176,12 @@ class ProjectController extends Controller
         return to_route('admin.project.trashed')->with('delete_success', $project);
     }
 
-    public function cancel($id)
+    public function cancel($slug)
     {
-        Project::withTrashed()->where('id', $id)->restore();
+        Project::withTrashed()->where('slug', $slug)->restore();
+        $project = Project::where('slug', $slug)->firstOrFail();
 
-        $project = Project::find($id);
+        $project = Project::find($slug);
 
         return to_route('admin.project.index')->with('cancel_success', $project);
     }

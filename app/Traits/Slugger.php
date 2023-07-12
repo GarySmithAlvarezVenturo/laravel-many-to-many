@@ -17,7 +17,7 @@ trait Slugger
         $slug = $baseSlug;
 
         // finche lo slug generatoè presente nella tabella
-        while (self::where('slug', $slug)->get()) {
+        while (self::where('slug', $slug)->first()) {
             // genera un nuovo slug concatenando il contatore
             $slug = $baseSlug . '-' . $i;
             // incrementa il contatore

@@ -29,9 +29,9 @@
                 <td><a href="{{ $project->link_github }}">Link</a></td>
 
                 <td>
-                    <a class="btn btn-warning" href="{{ route('admin.project.edit', ['project' => $project->id]) }}">Edit</a>
+                    <a class="btn btn-warning" href="{{ route('admin.project.edit', ['project' => $project]) }}">Edit</a>
                     <form
-                        action="{{ route('admin.project.destroy', ['project' => $project->id]) }}"
+                        action="{{ route('admin.project.destroy', ['project' => $project]) }}"
                         method="post"
                         class="d-inline-block"
                     >
