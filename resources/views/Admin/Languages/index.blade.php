@@ -28,6 +28,7 @@
                     <tr>
                         <th scope="row">{{ $language->name }}</th>
                         <td>
+                            <a class="btn btn-primary" href="{{ route('admin.language.show', ['language' => $language->id]) }}">View</a>
                             <a class="btn btn-warning" href="{{ route('admin.language.edit', ['language' => $language->id]) }}">Edit</a>
                             <button language="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $language->id }}">
                                 Delete
