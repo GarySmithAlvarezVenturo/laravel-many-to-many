@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\TypeController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\PageController as AdminPageController;
 use App\Http\Controllers\Guest\PageController as GuestPageController;
 
@@ -44,6 +45,7 @@ Route::middleware('auth', 'verified')
 
         Route::resource('project', ProjectController::class);
         Route::resource('type', TypeController::class);
+        Route::resource('language', LanguageController::class);
     });
 
 require __DIR__ . '/auth.php';

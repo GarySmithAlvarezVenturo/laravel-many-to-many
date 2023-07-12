@@ -2,7 +2,7 @@
 
 @section('contents')
 
-    @if (session('delete_success'))
+    {{-- @if (session('delete_success'))
     @php $project = session('delete_success') @endphp
     <div class="alert alert-danger">
         The project "{{ $project->title }}" has been Deleted
@@ -15,7 +15,7 @@
             <button class="btn btn-warning">Cancel</button>
         </form>
     </div>
-    @endif
+    @endif --}}
 
     <table class="table table-striped">
         <thead>

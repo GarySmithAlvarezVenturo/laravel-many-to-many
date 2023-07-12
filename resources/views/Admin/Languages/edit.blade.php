@@ -15,13 +15,13 @@
             </div>
         </div>
 
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="3" name="description">{{ old('description', $language->description)}}</textarea>
             <div class="invalid-feedback">
                 @error('description') {{ $message }} @enderror
             </div>
-        </div>
+        </div> --}}
 
         <button class="btn btn-primary">Edit</button>
     </form>

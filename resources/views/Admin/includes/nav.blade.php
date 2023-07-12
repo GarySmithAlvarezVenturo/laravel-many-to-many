@@ -21,15 +21,26 @@
                     </ul>
                 </li>
     
-                <li class="nav.item dropown">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Types
+                        Type
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{{ route('admin.type.index') }}">Index</a></li>
                         <li><a class="dropdown-item" href="{{ route('admin.type.create') }}">Add</a></li>
                     </ul>
     
+                </li>
+
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Languages
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{{ route('admin.language.index') }}">Index</a></li>
+                        <li><a class="dropdown-item" href="{{ route('admin.language.create') }}">Add</a></li>
+                    </ul>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -39,6 +50,7 @@
                 </li>
             </ul>
 
+            
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
