@@ -54,7 +54,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                     <form
-                        action="{{ route('admin.type.destroy', ['type' => $type]) }}"
+                        action="{{ route('Admin.type.destroy', ['type' => $type]) }}"
                         method="post"
                         class="d-inline-block"
                         id="confirm-delete"
