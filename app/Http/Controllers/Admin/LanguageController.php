@@ -101,6 +101,7 @@ class LanguageController extends Controller
      */
     public function destroy(Language $language)
     {
+        $language->projects()->detach();
         $language->delete();
 
         return to_route('admin.language.index')->with('delete_success', $language);

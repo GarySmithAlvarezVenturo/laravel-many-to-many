@@ -103,6 +103,12 @@ class TypeController extends Controller
      */
     public function destroy(Type $type)
     {
+        // metodo per eliminare un type e le righe nella tabella a cui è associato 
+        foreach ($type->projects as $project) {
+            $project->type_id = 1;
+            $project->update();
+        }
+
         $type->delete();
 
         return to_route('admin.type.index')->with('delete_success', $type);

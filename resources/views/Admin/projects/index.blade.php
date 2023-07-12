@@ -29,6 +29,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">Languages</th>
                 <th scope="col">Link Github</th>
+                <th scope="col">  </th>
             </tr>
         </thead>
         <tbody>
@@ -41,7 +42,13 @@
                     <td>{{ $project->last_update }}</td>
                     <td>{{ $project->collaborators }}</td>
                     <td>{{ $project->description }}</td>
-                    <td>{{ implode(', ', $project->languages->pluck('name')->all()) }}</td>
+                    {{-- <td>{{ implode(', ', $project->languages->pluck('name')->all()) }}</td> --}}
+                    <td>
+                        @foreach ($project->languages as $language)
+                            <a href="{{ route('admin.language.show', ['language' => $language])}}">{{ $language->name }}</a>
+                        @endforeach
+                    </td>
+                    
                     <td><a href="{{ $project->link_github }}">GitHub</a></td>
                     <td>
                         <a class="btn btn-primary" href="{{ route('admin.project.show', ['project' => $project->id]) }}">View</a>
