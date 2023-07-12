@@ -74,12 +74,24 @@
 
 
         <div class="mb-3">
-            <label for="languages" class="form-label">Languages</label>
-            <input type="text" class="form-control @error('languages') is-invalid @enderror" id="languages" rows="3" name="languages" value="{{ old('languages', $project->languages)}}">
-            <div class="invalid-feedback">
-                @error('languages') {{ $message }} @enderror
+            <h6>Languages</h6>
+            @foreach ($languages as $language)
+            <div class="form-check">
+                <input 
+                    class="form-check-input" 
+                    type="checkbox" 
+                    id="language{{ $language->id }}" 
+                    value="{{ $language->id }}"
+                    name="languages[]"
+                    @if (in_array($language->id, old('languages', $project->languages->pluck('id')->all()))) checked @endif 
+                >
+                <label class="form-check-label" for="language{{ $language->id }}">
+               {{ $language->name }}
+                </label>
             </div>
+            @endforeach
         </div>
+        
 
         <div class="mb-3">
             <label for="link_github" class="form-label">Link Github</label>

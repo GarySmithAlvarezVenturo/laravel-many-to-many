@@ -41,7 +41,7 @@
                     <td>{{ $project->last_update }}</td>
                     <td>{{ $project->collaborators }}</td>
                     <td>{{ $project->description }}</td>
-                    <td>{{ $project->languages }}</td>
+                    <td>{{ implode(', ', $project->languages->pluck('name')->all()) }}</td>
                     <td><a href="{{ $project->link_github }}">GitHub</a></td>
                     <td>
                         <a class="btn btn-primary" href="{{ route('admin.project.show', ['project' => $project->id]) }}">View</a>

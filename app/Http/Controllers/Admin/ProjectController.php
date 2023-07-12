@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Type;
 use App\Models\Project;
+use App\Models\Language;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -40,7 +41,8 @@ class ProjectController extends Controller
     public function create()
     {
         $types = Type::all();
-        return view('Admin.projects.create', compact('types'));
+        $languages = Language::all();
+        return view('Admin.projects.create', compact('types', 'languages'));
     }
 
     /**
@@ -70,6 +72,7 @@ class ProjectController extends Controller
 
         // return 'commentare se serve debuggare';
         // $newComic = Comic::create($data);
+        $newProject->languages()->sync($data['languages'] ?? []);
 
         return redirect()->route('admin.project.show', ['project' => $newProject]);
     }
@@ -94,7 +97,8 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $types = Type::all();
-        return view('admin.projects.edit', compact('project', 'types'));
+        $languages = Language::all();
+        return view('admin.projects.edit', compact('project', 'types', 'languages'));
     }
 
     /**
@@ -121,6 +125,8 @@ class ProjectController extends Controller
         $project->link_github = $data['link_github'];
         $project->type_id = $data['type_id'];
         $project->update();
+
+        $project->languages()->sync($data['languages'] ?? []);
 
         return redirect()->route('admin.project.show', ['project' => $project]);
     }
@@ -158,7 +164,8 @@ class ProjectController extends Controller
     public function harddelete($id)
     {
         $project = Project::withTrashed()->find($id);
-        $project->forceDelete();
+        //$project->forceDelete();
+        $project->languages()->detach();
 
         return to_route('admin.project.trashed')->with('delete_success', $project);
     }

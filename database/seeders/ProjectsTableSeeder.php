@@ -20,19 +20,17 @@ class ProjectsTableSeeder extends Seeder
         foreach (config('projects') as $objProject) {
 
             $project = Project::create([
-                "title" => $objProject['title'],
-                "author" => $objProject['author'],
+                "title"         => $objProject['title'],
+                "author"        => $objProject['author'],
                 "creation_date" => $objProject['creation_date'],
-                "last_update" => $objProject['last_update'],
+                "last_update"   => $objProject['last_update'],
                 "collaborators" => $objProject['collaborators'],
-                "description" => $objProject['description'],
-                "link_github" => $objProject['link_github'],
-                "type_id" => $objProject['type_id'],
+                "description"   => $objProject['description'],
+                "link_github"   => $objProject['link_github'],
+                "type_id"       => $objProject['type_id'],
             ]);
 
-            foreach ($objProject['languages'] as $language) {
-                $project->languages()->sync($language);
-            }
+            $project->languages()->sync($objProject['languages']);
 
         }
     }

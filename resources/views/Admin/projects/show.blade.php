@@ -25,7 +25,7 @@
                 <td>{{ $project->last_update }}</td>
                 <td>{{ $project->collaborators }}</td>
                 <td>{{ $project->description }}</td>
-                <td>{{ $project->languages }}</td>
+                <td>{{ implode(', ', $project->languages->pluck('name')->all()) }}</td>
                 <td><a href="{{ $project->link_github }}">Link</a></td>
 
                 <td>
