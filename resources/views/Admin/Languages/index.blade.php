@@ -17,16 +17,17 @@
         </div>
         @endif --}}
     
-        <table class="table table-striped">
+        <table class="table table-striped table-dark">
             <thead>
                 <tr>
                     <th scope="col">Name</th>
+                    <th scope="col">    </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($languages as $language)
                     <tr>
-                        <th scope="row">{{ $language->name }}</th>
+                        <td scope="row">{{ $language->name }}</td>
                         <td>
                             <a class="btn btn-primary" href="{{ route('admin.language.show', ['language' => $language->id]) }}">View</a>
                             <a class="btn btn-warning" href="{{ route('admin.language.edit', ['language' => $language->id]) }}">Edit</a>

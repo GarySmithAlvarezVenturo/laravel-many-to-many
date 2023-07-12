@@ -17,7 +17,7 @@
     </div>
     @endif
 
-    <table class="table table-striped bg-dark">
+    <table class="table table-striped table-dark">
         <thead>
             <tr>
                 <th scope="col">Title</th>
@@ -29,7 +29,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">Languages</th>
                 <th scope="col">Link Github</th>
-                <th scope="col">  </th>
+                <th class="w-25" scope="col">  </th>
             </tr>
         </thead>
         <tbody>

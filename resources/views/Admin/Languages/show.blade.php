@@ -17,10 +17,11 @@
     </div>
     @endif --}}
 
-    <table class="table table-striped">
+    <table class="table table-striped table-dark">
         <thead>
             <tr>
                 <th scope="col">Name</th>
+                <th scope="col"> </th>
             </tr>
         </thead>
         <tbody>
