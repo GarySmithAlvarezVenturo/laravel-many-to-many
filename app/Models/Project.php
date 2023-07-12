@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Type;
+use App\Traits\Slugger;
 use App\Models\Language;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -12,7 +13,14 @@ class Project extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use Slugger;
+
     public $timestamps = false;
+
+    public function getRouteKey()
+    {
+        return $this->slug;
+    }
 
     public function type()
     {
@@ -23,5 +31,5 @@ class Project extends Model
     {
         return $this->belongsToMany(Language::class);
     }
-
+    
 }

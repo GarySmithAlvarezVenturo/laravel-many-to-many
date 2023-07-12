@@ -58,20 +58,19 @@ class ProjectController extends Controller
 
         $data = $request->all();
         // Salvare i dati nel database
-        $newProject = new Project();
-        $newProject->title = $data['title'];
-        $newProject->author = $data['author'];
-        $newProject->creation_date = $data['creation_date'];
-        $newProject->last_update = $data['last_update'];
-        $newProject->collaborators = $data['collaborators'];
-        $newProject->description = $data['description'];
-        //$newProject->languages = $data['languages'];
-        $newProject->link_github = $data['link_github'];
-        $newProject->type_id = $data['type_id'];
+        $newProject                 = new Project();
+        $newProject->title          = $data['title'];
+        $newProject->slug           = Project::slugger($data['title']);
+        $newProject->author         = $data['author'];
+        $newProject->creation_date  = $data['creation_date'];
+        $newProject->last_update    = $data['last_update'];
+        $newProject->collaborators  = $data['collaborators'];
+        $newProject->description    = $data['description'];
+        // $newProject->languages   = $data['languages'];
+        $newProject->link_github    = $data['link_github'];
+        $newProject->type_id        = $data['type_id'];
         $newProject->save();
 
-        // return 'commentare se serve debuggare';
-        // $newComic = Comic::create($data);
         $newProject->languages()->sync($data['languages'] ?? []);
 
         return redirect()->route('admin.project.show', ['project' => $newProject]);
@@ -83,8 +82,9 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show($slug)
     {
+        $project = Project::where('slug', $slug)->firstOrFail();
         return view('admin.projects.show', compact('project'));
     }
 
