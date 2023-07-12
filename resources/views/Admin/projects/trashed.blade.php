@@ -46,7 +46,11 @@
                     <td>{{ $project->last_update }}</td>
                     <td>{{ $project->collaborators }}</td>
                     <td>{{ $project->description }}</td>
-                    <td>{{ $project->languages }}</td>
+                    <td>
+                        @foreach ($project->languages as $language)
+                            <a href="{{ route('admin.language.show', ['language' => $language])}}">{{ $language->name }}</a>
+                        @endforeach
+                    </td>
                     <td>{{ $project->link_github }}</td>
                     <td>
                         <a class="btn btn-primary" href="{{ route('admin.project.show', ['project' => $project->id]) }}">View</a>

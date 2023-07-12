@@ -62,7 +62,7 @@
 
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="3" name="description" value="{{ old('description')}}"></textarea>
+            <textarea class="form-control @error('description') is-invalid @enderror" id="description" rows="3" name="description">{{ old('description')}}</textarea>
             <div class="invalid-feedback">
                 @error('description') {{ $message }} @enderror
             </div>
@@ -91,7 +91,7 @@
 
         <div class="mb-3">
             <label for="link_github" class="form-label">Link Github</label>
-            <input type="textarea" class="form-control @error('description') is-invalid @enderror" id="description" name="description" value="{{ old('description')}}">
+            <input type="textarea" class="form-control @error('link_github') is-invalid @enderror" id="link_github" name="link_github" value="{{ old('link_github')}}">
             <div class="invalid-feedback">
                 @error('link_github') {{ $message }} @enderror
             </div>
