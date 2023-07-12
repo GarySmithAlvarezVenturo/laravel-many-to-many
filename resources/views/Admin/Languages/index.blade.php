@@ -3,11 +3,11 @@
 @section('contents')
 
     @if (session('delete_success'))
-    @php $project = session('delete_success') @endphp
+    @php $language = session('delete_success') @endphp
     <div class="alert alert-danger">
-        The project "{{ $project->title }}" has been Deleted
+        The Language "{{ $language->name }}" has been Deleted
         <form
-            action="{{ route("admin.project.restore", ['project' => $project]) }}"
+            action="{{ route("admin.language.restore", ['language' => $language]) }}"
                 method="post"
                 class="d-inline-block"
             >
@@ -25,14 +25,13 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($types as $type)
+            @foreach ($languages as $language)
                 <tr>
-                    <th scope="row">{{ $type->name }}</th>
-                    <td>{{ $type->description }}</td>
+                    <th scope="row">{{ $language->name }}</th>
+                    <td>{{ $language->description }}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{ route('admin.type.show', ['type' => $type->id]) }}">View</a>
-                        <a class="btn btn-warning" href="{{ route('admin.type.edit', ['type' => $type->id]) }}">Edit</a>
-                        <button type="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $type->id }}">
+                        <a class="btn btn-warning" href="{{ route('admin.language.edit', ['language' => $language->id]) }}">Edit</a>
+                        <button language="button" class="btn btn-danger js-delete" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $language->id }}">
                             Delete
                         </button>
                     </td>
@@ -41,7 +40,7 @@
         </tbody>
     </table> 
 
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal fade text-dark" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -54,11 +53,11 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                     <form
-                        action="{{ route('admin.type.destroy', ['type' => $type]) }}"
+                        action="{{ route('admin.language.destroy', ['language' => $language]) }}"
                         method="post"
                         class="d-inline-block"
                         id="confirm-delete"
-                        data-template="{{ route('admin.type.destroy', ['type' => '*****']) }}"
+                        data-template="{{ route('admin.language.destroy', ['language' => '*****']) }}"
                     >
                         @csrf
                         @method('delete')
