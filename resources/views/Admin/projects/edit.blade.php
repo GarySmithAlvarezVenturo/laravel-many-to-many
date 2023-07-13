@@ -15,6 +15,16 @@
             </div>
         </div>
 
+        <div class="input-group mb-3">
+            <input type="file" class="form-control" id="image" name="image" accept="image/*">
+            <label class="input-group-text  @error('image') is-invalid @enderror" for="image">Upload</label>
+            @error('image')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+
         <div class="mb-3">
             <label for="type" class="form-label">Type</label>
             <select class="form-select @error('type_id') is-invalid @enderror"  id="type" name="type_id">

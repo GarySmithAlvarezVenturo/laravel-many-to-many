@@ -59,7 +59,7 @@
                             @csrf
                             <button class="btn btn-warning">Restore</button>
                         </form>
-                        <button type="button" class="btn btn-danger js-delete d-inline-block" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->id }}">
+                        <button type="button" class="btn btn-danger js-delete d-inline-block" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{ $project->slug }}">
                             Delete
                         </button>
                     </td>

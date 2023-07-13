@@ -13,6 +13,7 @@ class ProjectController extends Controller
     private $validations = [
         'title'         => 'required|string|min:4|max:50',
         'author'        => 'required|string|max:30',
+        'image'         => 'image|max:10',
         'creation_date' => 'required|date',
         'last_update'   => 'required|date',
         'collaborators' => 'nullable|string|max:150',
@@ -57,6 +58,8 @@ class ProjectController extends Controller
         $request->validate($this->validations);
 
         $data = $request->all();
+
+        $imagePath = Storage::put('uploads', $data['image']);
         // Salvare i dati nel database
         $newProject                 = new Project();
         $newProject->title          = $data['title'];
@@ -117,15 +120,16 @@ class ProjectController extends Controller
 
         $data = $request->all();
         // Salvare i dati nel database
-        $project->title = $data['title'];
-        $project->author = $data['author'];
-        $project->creation_date = $data['creation_date'];
-        $project->last_update = $data['last_update'];
-        $project->collaborators = $data['collaborators'];
-        $project->description = $data['description'];
-        //$project->languages = $data['languages'];
-        $project->link_github = $data['link_github'];
-        $project->type_id = $data['type_id'];
+        $project->title             = $data['title'];
+        $project->author            = $data['author'];
+        $newProject->image          = $imagePath;
+        $project->creation_date     = $data['creation_date'];
+        $project->last_update       = $data['last_update'];
+        $project->collaborators     = $data['collaborators'];
+        $project->description       = $data['description'];
+        //$project->languages        = $data['languages'];
+        $project->link_github       = $data['link_github'];
+        $project->type_id           = $data['type_id'];
         $project->update();
 
         $project->languages()->sync($data['languages'] ?? []);
@@ -167,7 +171,7 @@ class ProjectController extends Controller
 
     public function harddelete($slug)
     {
-        $project = Project::withTrashed()->find($slug);
+         $project = Project::withTrashed()->where('slug', $slug)->first();
         // $project = Project::where('slug', $slug)->firstOrFail();
         
         $project->languages()->detach();
