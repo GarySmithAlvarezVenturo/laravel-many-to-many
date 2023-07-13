@@ -13,7 +13,7 @@ class ProjectController extends Controller
     private $validations = [
         'title'         => 'required|string|min:4|max:50',
         'author'        => 'required|string|max:30',
-        'image'         => 'image|max:10',
+        'image'         => 'nullable|image|max:1024',
         'creation_date' => 'required|date',
         'last_update'   => 'required|date',
         'collaborators' => 'nullable|string|max:150',
@@ -63,6 +63,7 @@ class ProjectController extends Controller
         // Salvare i dati nel database
         $newProject                 = new Project();
         $newProject->title          = $data['title'];
+        $Project->image             = $imagePath;
         $newProject->slug           = Project::slugger($data['title']);
         $newProject->author         = $data['author'];
         $newProject->creation_date  = $data['creation_date'];
@@ -119,10 +120,24 @@ class ProjectController extends Controller
         $request->validate($this->validations);
 
         $data = $request->all();
+
+        if ($data['image']) {
+
+            // Per salvare la nuova immagine
+            $imagePath = Storage::put('uploads', $data['image']);
+
+            // per eliminare la vecchia immagine
+
+            Storage::delete($project->image);
+            
+            $project->image         = $imagePath;
+        }
+
+        Storage::delete($project->image);
         // Salvare i dati nel database
         $project->title             = $data['title'];
         $project->author            = $data['author'];
-        $newProject->image          = $imagePath;
+        // $project->image             = $imagePath;
         $project->creation_date     = $data['creation_date'];
         $project->last_update       = $data['last_update'];
         $project->collaborators     = $data['collaborators'];
